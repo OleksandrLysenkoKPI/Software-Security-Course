@@ -1,0 +1,2 @@
+English text: Hello world! Some random text
+Український текст: Привіт світ! Якийсь випадковий текст
