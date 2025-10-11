@@ -3,7 +3,7 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(120deg, #3d5a80, #98c1d9);
+  background: linear-gradient(120deg, #f2e03f, #e5612a);
 }
 
 .main {
@@ -75,7 +75,7 @@ body {
   padding: 0.25rem 0;
   margin: 0;
   border-radius: 0 0 4px 4px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   min-width: 160px;
   z-index: 1000;
 }
