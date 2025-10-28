@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Криптосистема</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Панель меню -->
+  <nav class="menu">
+    <ul>
+      <li class="dropdown">Файл
+        <ul class="dropdown-content">
+          <li id="newFile">Створити</li>
+          <li id="openFile">Відкрити</li>
+          <li id="saveFile">Зберегти</li>
+          <li id="printFile">Друк</li>
+        </ul>
+      </li>
+      <li class="dropdown">Операції
+        <ul class="dropdown-content">
+          <li id="encryptBtn">Шифрувати</li>
+          <li id="decryptBtn">Дешифрувати</li>
+          <li id="bruteForceBtn">Атака Цезаря (Brute Force Caesar)</li>
+        </ul>
+      </li>
+      <li class="dropdown">Довідка
+        <ul class="dropdown-content">
+          <li id="aboutDev">Про розробника</li>
+        </ul>
+      </li>
+      <li id="exitApp">Вихід</li>
+    </ul>
+  </nav>
+
+  <!-- Основний блок -->
+  <main class="main">
+    <textarea id="textArea" placeholder="Введіть або відкрийте текст..."></textarea>
+
+    <!-- Вибір алгоритму -->
+    <div class="form-group">
+      <label for="cipherType">Тип шифру:</label>
+      <select id="cipherType">
+        <option value="caesar">Цезаря</option>
+        <option value="trithemiusLinear">Тритеміуса (лінійне)</option>
+        <option value="trithemiusPolynomial">Тритеміуса (поліном)</option>
+        <option value="trithemiusPassword">Тритеміуса (гасло)</option>
+        <option value="book">Книжковий (вірш)</option>
+      </select>
+    </div>
+
+    <!-- Поле для ключа (звичайний одно-рядковий) -->
+    <div id="keyContainer">
+      <div class="form-group">
+        <label for="keyInput">Ключ:</label>
+        <input id="keyInput" placeholder="Наприклад: '3' або '2 5' або '1,2,3' або 'password'">
+      </div>
+      <div id="keyHint" style="color:#ddd; font-size:0.9rem; margin-top:0.25rem;">
+        Виберіть тип шифру, щоб побачити підказку по формату ключа.
+      </div>
+    </div>
+
+    <!-- Поле для вірша (ключ для книжкового шифру) -->
+    <div id="poemContainer" style="display:none; margin-top:0.75rem;">
+      <label for="poemInput" style="display:block; margin-bottom:0.25rem; color:#fff;">Вірш (ключ) — введіть рядки в окремих рядках:</label>
+      <textarea id="poemInput" rows="6" placeholder="Вставте вірш тут — кожен рядок нового рядка буде окремим рядком таблиці."></textarea>
+      <div style="color:#ddd; font-size:0.85rem; margin-top:0.25rem;">
+        Таблиця будується з рядків вірша; короткі рядки підтягуються пробілами до максимальної довжини рядка.
+      </div>
+    </div>
+
+    <!-- Повідомлення -->
+    <div id="message" style="color: yellow; font-weight: bold; min-height: 1.2em;"></div>
+    <div id="bruteResults"
+         style="color: white; font-family: monospace; margin-top: 1rem; max-height: 300px; overflow-y: auto;"></div>
+  </main>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
