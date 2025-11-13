@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="uk">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Crypto — DES/3DES/AES</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <h1>Крипто-інтерфейс</h1>
+
+    <div>
+        <label>Алгоритм</label>
+        <select id="alg">
+            <option>DES</option>
+            <option>3DES</option>
+            <option selected>AES</option>
+        </select>
+
+        <label style="margin-left:8px">Режим</label>
+        <select id="mode">
+            <option>CBC</option>
+            <option>ECB</option>
+            <option>CFB</option>
+            <option>OFB</option>
+            <option>CTR</option>
+            <option>GCM</option>
+        </select>
+    </div>
+
+    <label>Ключ (рядок)</label>
+    <input id="key" style="width:100%" placeholder="Введіть ключ/пароль" />
+
+    <label>Plaintext</label>
+    <textarea id="plain">Hello world — тест</textarea>
+
+    <div class="row">
+        <button id="encrypt">Зашифрувати</button>
+        <button id="decrypt">Розшифрувати</button>
+    </div>
+
+    <label>Result (ciphertext base64 shown)</label>
+    <textarea id="result"></textarea>
+
+    <label>Full payload JSON (для передачі/збереження)</label>
+    <textarea id="payload"></textarea>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>

@@ -2,3 +2,5 @@
 /.vscode
 ~*
 *.docx
+/venv
+*__pycache__
