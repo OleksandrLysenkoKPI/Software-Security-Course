@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Криптосистема рюкзака (Merkle–Hellman) — КП5</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Криптосистема рюкзака (Merkle–Hellman)</h1>
+
+    <div class="grid">
+        <!-- Key generation card -->
+        <div class="card">
+            <h3>1. Генерація ключів</h3>
+
+            <label>Розмір блоку (n) — кількість біт у блоці</label>
+            <input id="nInput" type="number" value="8" min="2" max="32" />
+
+            <div style="margin-top:8px" class="row">
+                <button onclick="generateRandomKeys()">Згенерувати випадкові ключі</button>
+                <button onclick="useClassicExample()">Завантажити чисельний приклад (Wiki)</button>
+            </div>
+
+            <div class="hint">Або введіть власну суперзростаючу послідовність (через коми):</div>
+            <input id="manualW" placeholder="наприклад: 2,7,11,21,42,89,180,354" />
+            <div class="row" style="margin-top:8px">
+                <button onclick="createFromManualW()">Створити ключі з W</button>
+            </div>
+
+            <hr />
+
+            <label>Закритий ключ (W, q, r, r_inv):</label>
+            <textarea id="privateKey" rows="4" readonly></textarea>
+
+            <label style="margin-top:8px">Відкритий ключ A (public):</label>
+            <textarea id="publicKey" rows="2" readonly></textarea>
+        </div>
+
+        <!-- Encryption card -->
+        <div class="card">
+            <h3>2. Шифрування (за допомогою відкритого ключа)</h3>
+
+            <label>Вхід (текст або бінарний, переключайте):</label>
+            <input id="plainText" placeholder="Напишіть повідомлення (наприклад: Hello)" />
+
+            <div style="margin-top:8px" class="row">
+                <select id="inputMode">
+                    <option value="text">Текст (ASCII → бінарний)</option>
+                    <option value="binary">Чистий бінар (0/1)</option>
+                </select>
+                <button onclick="encryptMessage()">Зашифрувати</button>
+            </div>
+
+            <div style="margin-top:10px">
+                <label>Шифротекст (послідовність чисел — окремі блоки через пробіл):</label>
+                <textarea id="cipherText" rows="3" readonly></textarea>
+            </div>
+
+            <div class="hint">Після шифрування з'явиться список чисел — кожне число відповідає одному n-бітному блоку.
+            </div>
+        </div>
+
+        <!-- Decryption card -->
+        <div class="card">
+            <h3>3. Розшифрування (за допомогою закритого ключа)</h3>
+
+            <label>Введіть шифротекст (числа через пробіл або кому):</label>
+            <input id="cipherInput" placeholder="Наприклад: 1129  ..." />
+
+            <div class="row" style="margin-top:8px">
+                <button onclick="decryptMessage()">Розшифрувати</button>
+                <button onclick="decryptToBinary()">Розшифрувати → бінар</button>
+            </div>
+
+            <label style="margin-top:8px">Декодований (текст):</label>
+            <textarea id="decryptedText" rows="2" readonly></textarea>
+
+            <label style="margin-top:8px">Декодований (бітова послідовність):</label>
+            <textarea id="decryptedBits" rows="3" readonly></textarea>
+        </div>
+
+        <!-- Example / logs -->
+        <div class="card full">
+            <h3>Пояснення / Чисельний приклад</h3>
+            <p>
+                Рівень реалізації: повна генерація ключів, шифрування / розшифрування блоків довжини
+                <strong>n</strong>.
+            </p>
+            <p>
+                Чисельний приклад (узятий з відкритих джерел / опису Merkle–Hellman):
+                приватна суперзростаюча послідовність W = (2,7,11,21,42,89,180,354),
+                q = 881 (> sum(W)=706), r = 588 (gcd(r,q)=1), r_inv = 442.
+                Публічний ключ A = (295,592,301,14,28,353,120,236). Приклад: повідомлення 97 (01100001₂) → c = 1129.
+            </p>
+            <p>Лог / повідомлення системи:</p>
+            <pre id="logArea">Готово.</pre>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
