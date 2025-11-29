@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="uk">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>КП6 — RSA (HTML + JS)</title>
+    <link rel="stylesheet" href="style.">
+</head>
+
+<body>
+    <h1>КП6 — Шифрування з відкритим ключем (RSA) — HTML + JS</h1>
+
+    <div class="panel">
+        <h2>1. Чисельний приклад RSA (малий приклад)</h2>
+        <div class="muted">Показано всі кроки: вибір p, q, обчислення n, φ(n), вибір e, обчислення d, шифрування та
+            розшифрування числа m.</div>
+        <pre id="numeric-example"></pre>
+        <button id="run-numeric">Запустити чисельний приклад</button>
+    </div>
+
+    <div class="panel">
+        <h2>2. Генерація ключів (відкритий / закритий)</h2>
+        <div class="muted">Рекомендовано: modulusLength = 2048, RSA-OAEP, SHA-256.</div>
+        <label>Ім'я контейнера (локально, для підписової ідентифікації) — чисто інформаційне:</label>
+        <input type="text" id="key-name" placeholder="KeyContainerName (не обов'язково)" />
+        <div style="margin-top:8px;">
+            <button id="generate">Згенерувати пару ключів (2048 b)</button>
+            <button id="export-pub" disabled>Експортувати публічний (PEM)</button>
+            <button id="export-priv" disabled>Експортувати приватний (PEM)</button>
+            <button id="download-pub" disabled>Завантажити public.pem</button>
+            <button id="download-priv" disabled>Завантажити private.pem</button>
+        </div>
+
+        <label>Публічний ключ (PEM):</label>
+        <textarea id="pub-pem" rows="6" readonly></textarea>
+        <label>Приватний ключ (PEM) — зберігайте обережно:</label>
+        <textarea id="priv-pem" rows="6" readonly></textarea>
+    </div>
+
+    <div class="panel">
+        <h2>3. Шифрування за допомогою публічного ключа</h2>
+        <label>Вставте/встановіть публічний ключ (PEM) або використайте згенерований вище.</label>
+        <textarea id="import-pub-pem" rows="5" placeholder="-----BEGIN PUBLIC KEY-----..."></textarea>
+        <div class="row">
+            <button id="import-pub">Імпортувати публічний ключ</button>
+            <button id="copy-pub-to-import">Скопіювати з згенерованого в поле імпорту</button>
+        </div>
+
+        <label>Текст для шифрування:</label>
+        <textarea id="plaintext" rows="4">Привіт, це тестове повідомлення.</textarea>
+        <div class="row">
+            <button id="encrypt" disabled>Зашифрувати</button>
+            <button id="clear-ct">Очистити шифротекст</button>
+        </div>
+
+        <label>Шифротекст (Base64):</label>
+        <textarea id="ciphertext" rows="4" readonly></textarea>
+        <div class="small">Скопіюйте цей текст для передачі стороні, що має приватний ключ.</div>
+    </div>
+
+    <div class="panel">
+        <h2>4. Розшифрування (приватний ключ має бути в пам'яті — з генерації або з імпорту)</h2>
+        <div class="muted">Приватний ключ завантажується в сесію при генерації. Ви можете також імпортувати PEM
+            приватного ключа для тестів (не зберігайте в браузері в небезпечних умовах).</div>
+        <label>Приватний ключ (PEM) для імпорту (опціонально):</label>
+        <textarea id="import-priv-pem" rows="5" placeholder="-----BEGIN PRIVATE KEY-----..."></textarea>
+        <div class="row">
+            <button id="import-priv">Імпортувати приватний ключ</button>
+            <button id="clear-keys">Очистити збережений приватний ключ</button>
+        </div>
+
+        <label>Вставте шифротекст (Base64) для розшифрування:</label>
+        <textarea id="ct-to-decrypt" rows="4"></textarea>
+        <div class="row">
+            <button id="decrypt" disabled>Розшифрувати</button>
+            <button id="paste-ct-from-cipher">Вставити з поля шифротексту вище</button>
+        </div>
+        <label>Розшифрований текст:</label>
+        <textarea id="decrypted" rows="4" readonly></textarea>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
