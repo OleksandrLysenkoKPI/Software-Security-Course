@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота: RSA ЕЦП</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/3.3.2/jsencrypt.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Комп'ютерний практикум №7: RSA ЕЦП</h1>
+
+    <div class="card">
+        <h2>1. Генерація пари ключів</h2>
+        <p>Натисніть кнопку, щоб створити пару ключів (Публічний та Приватний).</p>
+        <button onclick="generateKeys()">Згенерувати ключі</button>
+        
+        <label>Приватний ключ (Private Key):</label>
+        <textarea id="privkey" class="key-display" readonly></textarea>
+        
+        <label>Публічний ключ (Public Key):</label>
+        <textarea id="pubkey" class="key-display" readonly></textarea>
+    </div>
+
+    <div class="card">
+        <h2>2. Підписання повідомлення</h2>
+        <label>Вхідне повідомлення:</label>
+        <input type="text" id="sign_message" value="Hello world!">
+        
+        <label>Використати приватний ключ (скопіюйте сюди або згенеруйте вище):</label>
+        <textarea id="sign_privkey" class="key-display"></textarea>
+        
+        <button onclick="signMessage()">Створити підпис</button>
+        
+        <label>Результат (ЕЦП у Base64):</label>
+        <textarea id="signature_result" readonly></textarea>
+    </div>
+
+    <div class="card">
+        <h2>3. Перевірка підпису</h2>
+        <label>Повідомлення для перевірки:</label>
+        <input type="text" id="verify_message" value="Hello world!">
+        
+        <label>Підпис (Base64):</label>
+        <textarea id="verify_signature" placeholder="Вставте підпис тут..."></textarea>
+        
+        <label>Публічний ключ (відправника):</label>
+        <textarea id="verify_pubkey" class="key-display"></textarea>
+        
+        <button onclick="verifyMessage()">Перевірити ЕЦП</button>
+        
+        <div id="verification_status"></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
